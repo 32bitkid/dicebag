@@ -1,18 +1,20 @@
-faces = {}
+var generateFaces = function(sides) {
+	var value, faces;
 
-var generateFaces = function(name, sides) {
-	var value;
-
-	faces[name] = {};
-	faces[name]["sequence"] = []
+	faces = {};
+	faces["sequence"] = []
 	for(var i = 0; i < sides; i++) {
 		value = i/sides;
-		faces[name]["face"+(i+1)] = value;
-		faces[name]["sequence"].push(value);
+		faces["face"+(i+1)] = value;
+		faces["sequence"].push(value);
 	}
+
+	return faces;
 }
 
-generateFaces("sixSided", 6);
-generateFaces("tenSided", 10);
+var faces = {
+	sixSided: generateFaces(6),
+	tenSided: generateFaces(10)
+}
 
 module.exports = faces
