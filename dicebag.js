@@ -1,19 +1,16 @@
 var DiceBag = (function() {
 
-	var standardDieLookup = function(value) { return value + 1; }
+	var lookupFn = function(sides, value) {
+		return sides[value];
+	};
+
 	var createDie = function(context, random , sides) {
-		var actualSides;
-		var lookupFn;
 
 		if(typeof(sides) === "number") {
-			actualSides = sides;
-			lookupFn = standardDieLookup;
-		}
-		else if(sides.length) {
-			actualSides = sides.length;
-			lookupFn = function(value) {
-				return sides[value];
-			};
+			var totalSides = sides;
+			sides = [];
+			for(var i=1;i<=totalSides;i++)
+				sides.push(i);
 		}
 
 		var roll = function(times, modifier) {
@@ -23,8 +20,8 @@ var DiceBag = (function() {
 			var dieResult;
 
 			for(var i = 0; i < times; i++) {
-				dieResult = Math.floor(random() * actualSides);
-				result.addRoll(lookupFn(dieResult));
+				dieResult = lookupFn(sides, Math.floor(random() * sides.length));
+				result.addRoll(dieResult);
 			}
 
 			return result;
