@@ -36,13 +36,16 @@ var DiceBag = (function() {
 	function DiceBag(random) {
 		this.random = random || Math.random;
 
-		this.d6 = createDie(this, random, 6);
-		this.d10 = createDie(this, random, 10);
+		var boundCreateDie = function(sides) { return createDie(this, random, sides); };
+
+		this.d6 = boundCreateDie(6);
+		this.d10 = boundCreateDie(10);
+
 		this.efron = {
-			red: createDie(this, random, [4,4,4,4,0,0]),
-			green: createDie(this, random, [3,3,3,3,3,3]),
-			blue: createDie(this, random, [6,6,2,2,2,2]),
-			purple: createDie(this, random, [5,5,5,1,1,1])
+			red: boundCreateDie([4,4,4,4,0,0]),
+			green: boundCreateDie([3,3,3,3,3,3]),
+			blue: boundCreateDie([6,6,2,2,2,2]),
+			purple: boundCreateDie([5,5,5,1,1,1])
 		};
 	}
 
