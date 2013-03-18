@@ -83,7 +83,7 @@ var DiceBag = (function() {
 	}
 
 	var tokens = {
-		basic: /^(\d*)([dD])(\d+)(\s*([\+\-])\s*(\d+))?/
+		basic: /^(\d*)([dD])(\d+)(([\+\-])(\d+))?/
 	}
 	DiceBag.prototype.roll = function(expression) {
 		var results
