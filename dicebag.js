@@ -47,6 +47,12 @@ var DiceBag = (function() {
 			blue: boundCreateDie([6,6,2,2,2,2]),
 			purple: boundCreateDie([5,5,5,1,1,1])
 		};
+
+		this.grime = {
+			red: boundCreateDie([3,3,3,3,3,6]),
+			green: boundCreateDie([2,2,2,5,5,5]),
+			blue: boundCreateDie([1,4,4,4,4,4]),
+		}
 	}
 
 	function RollResult() {
