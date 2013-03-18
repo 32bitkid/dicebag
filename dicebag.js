@@ -36,34 +36,42 @@ var DiceBag = (function() {
 	function DiceBag(random) {
 		this.random = random || Math.random;
 
-		var boundCreateDie = function(sides) { return createDie(this, random, sides); };
+		var createBoundDie = function(sides) { return createDie(this, random, sides); };
 
-		this.d6 = boundCreateDie(6);
-		this.d10 = boundCreateDie(10);
+		this.d6 = createBoundDie(6);
+		this.d10 = createBoundDie(10);
 
 		this.efron = {
-			red: boundCreateDie([4,4,4,4,0,0]),
-			green: boundCreateDie([3,3,3,3,3,3]),
-			blue: boundCreateDie([6,6,2,2,2,2]),
-			purple: boundCreateDie([5,5,5,1,1,1])
+			red: createBoundDie([4,4,4,4,0,0]),
+			green: createBoundDie([3,3,3,3,3,3]),
+			blue: createBoundDie([6,6,2,2,2,2]),
+			purple: createBoundDie([5,5,5,1,1,1])
 		};
 
+		this.grime5 = {
+			red: createBoundDie([2,2,2,7,7,7]),
+			green: createBoundDie([1,1,6,6,6,6]),
+			blue: createBoundDie([5,5,5,5,5,0]),
+			purple: createBoundDie([9,4,4,4,4,4]),
+			yellow: createBoundDie([8,8,3,3,3,3]),
+		}
+
 		this.grime3 = {
-			red: boundCreateDie([3,3,3,3,3,6]),
-			green: boundCreateDie([2,2,2,5,5,5]),
-			blue: boundCreateDie([1,4,4,4,4,4]),
+			red: createBoundDie([3,3,3,3,3,6]),
+			green: createBoundDie([2,2,2,5,5,5]),
+			blue: createBoundDie([1,4,4,4,4,4]),
 		}
 
 		this.miwin = {
-			red: boundCreateDie([1,2,5,6,7,9]),
-			green: boundCreateDie([1,3,4,5,8,9]),
-			blue: boundCreateDie([2,3,4,6,7,8]),
+			red: createBoundDie([1,2,5,6,7,9]),
+			green: createBoundDie([1,3,4,5,8,9]),
+			blue: createBoundDie([2,3,4,6,7,8]),
 		}
 
 		this.intransitive = {
-			red: boundCreateDie([1,1,3,5,5,6]),
-			green: boundCreateDie([2,3,3,4,4,5]),
-			blue: boundCreateDie([1,2,2,4,6,6]),
+			red: createBoundDie([1,1,3,5,5,6]),
+			green: createBoundDie([2,3,3,4,4,5]),
+			blue: createBoundDie([1,2,2,4,6,6]),
 		}
 	}
 
