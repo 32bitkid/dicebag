@@ -38,8 +38,13 @@ var DiceBag = (function() {
 
 		var createBoundDie = function(sides) { return createDie(this, random, sides); };
 
+		this.d4 = createBoundDie(4);
 		this.d6 = createBoundDie(6);
+		this.d8 = createBoundDie(8);
 		this.d10 = createBoundDie(10);
+		this.d12 = createBoundDie(12);
+		this.d20 = createBoundDie(20);
+		this.d100 = createBoundDie(100);
 
 		this.efron = {
 			red: createBoundDie([4,4,4,4,0,0]),
