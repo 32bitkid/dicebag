@@ -53,6 +53,12 @@ var DiceBag = (function() {
 			green: boundCreateDie([2,2,2,5,5,5]),
 			blue: boundCreateDie([1,4,4,4,4,4]),
 		}
+
+		this.miwin = {
+			red: boundCreateDie([1,2,5,6,7,9]),
+			green: boundCreateDie([1,3,4,5,8,9]),
+			blue: boundCreateDie([2,3,4,6,7,8]),
+		}
 	}
 
 	function RollResult() {
