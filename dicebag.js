@@ -16,10 +16,10 @@ var DiceBag = (function() {
 			};
 		}
 
-		var roll = function(times) {
-			times = times || 1;
+		var roll = function(times, modifier) {
+			times = (times === undefined) ? 1 : times;
 
-			var result = new RollResult();
+			var result = new RollResult(modifier);
 			var dieResult;
 
 			for(var i = 0; i < times; i++) {
@@ -80,17 +80,50 @@ var DiceBag = (function() {
 		}
 	}
 
-	function RollResult() {
+	var tokens = {
+		basic: /^(\d*)([dD])(\d+)(\s*([\+\-])\s*(\d+))?/
+	}
+	DiceBag.prototype.roll = function(expression) {
+		var results
+
+		if(results = tokens.basic.exec(expression)) {
+			var dieType = results[2]
+			var sides = results[3];
+			var times = results[1] ? parseInt(results[1]) : 1;
+			var modifier = 0;
+
+			if(results[4] !== undefined) {
+				var sign = results[5] == "+" ? 1 : -1;
+				modifier = parseInt(results[6]) * sign;
+			}
+
+			var die = this[dieType+sides];
+			if(die == undefined) {
+				die = createDie(this, this.random, parseInt(sides));
+			}
+			return die(times, modifier)
+		}
+	}
+
+	function RollResult(modifier) {
 		this.rolls = [];
-		this.total = 0;
+		this.modifier = modifier || 0;
 	}
 
 	RollResult.prototype.addRoll = function(roll) {
 		this.rolls.push(roll);
-		this.total += roll;
 	};
 
-	RollResult.prototype.valueOf = function() { return this.total; };
+	RollResult.prototype.total = function() {
+		var total = this.modifier;
+		for(var i = 0; i<this.rolls.length; i++)
+			total += this.rolls[i];
+		return total;
+	}
+
+	RollResult.prototype.pips = RollResult.prototype.total;
+
+	RollResult.prototype.valueOf = function() { return this.total(); };
 
 	return DiceBag;
 })();

@@ -37,7 +37,7 @@ describe("rolling a d6", function() {
 		it("get the #.total", function() {
 			bag = new DiceBag(sequence(faces.face1, faces.face3));
 			var result = bag.d6(2);
-			assert.equal(result.total, 4);
+			assert.equal(result.total(), 4);
 		});
 
 		it("access the individual rolls", function() {
