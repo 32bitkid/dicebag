@@ -2,7 +2,10 @@ var DiceBag = (function() {
 	function DiceBag(random) {
 		this.random = random || Math.random;
 		this.efron = {
-			red: createDie({sides:[4,4,4,4,0,0], random: random})
+			red: createDie({sides:[4,4,4,4,0,0], random: random}),
+			green: createDie({sides:[3,3,3,3,3,3], random: random}),
+			blue: createDie({sides:[6,6,2,2,2,2], random: random}),
+			purple: createDie({sides:[5,5,5,1,1,1], random: random})
 		};
 	}
 
