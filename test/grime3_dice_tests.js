@@ -15,7 +15,7 @@ describe("using a set of 3 Grime dice", function() {
 		}
 	};
 
-	describe("rolling red die", function() {
+	describe("the red die", function() {
 
 		it("should return 3 for the first side",  generateTest("red", faces.face1, 3));
 		it("should return 3 for the second side", generateTest("red", faces.face2, 3));
@@ -25,7 +25,7 @@ describe("using a set of 3 Grime dice", function() {
 		it("should return 6 for the sixth side",  generateTest("red", faces.face6, 6));
 	});
 
-	describe("rolling green die", function() {
+	describe("the green die", function() {
 		it("should return 2 for the first side",  generateTest("green", faces.face1, 2));
 		it("should return 2 for the second side", generateTest("green", faces.face2, 2));
 		it("should return 2 for the third side",  generateTest("green", faces.face3, 2));
@@ -34,7 +34,7 @@ describe("using a set of 3 Grime dice", function() {
 		it("should return 5 for the sixth side",  generateTest("green", faces.face6, 5));
 	});
 
-	describe("rolling blue die", function() {
+	describe("the blue die", function() {
 		it("should return 1 for the first side",  generateTest("blue", faces.face1, 1));
 		it("should return 4 for the second side", generateTest("blue", faces.face2, 4));
 		it("should return 4 for the third side",  generateTest("blue", faces.face3, 4));
