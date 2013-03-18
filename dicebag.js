@@ -23,7 +23,7 @@ var DiceBag = (function() {
 			var dieResult;
 
 			for(var i = 0; i < times; i++) {
-				dieResult = Math.round(random() * actualSides);
+				dieResult = Math.floor(random() * actualSides);
 				result.addRoll(lookupFn(dieResult));
 			}
 
