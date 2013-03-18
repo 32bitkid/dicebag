@@ -34,9 +34,11 @@ var DiceBag = (function() {
 	}
 
 	function DiceBag(random) {
-		this.random = random || Math.random;
 
-		var createBoundDie = function(sides) { return createDie(this, random, sides); };
+		this.random = random || Math.random;
+		var context = this;
+
+		var createBoundDie = function(sides) { return createDie(context, context.random, sides); };
 
 		this.d4 = createBoundDie(4);
 		this.d6 = createBoundDie(6);
