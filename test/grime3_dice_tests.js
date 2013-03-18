@@ -5,13 +5,13 @@ var faces = require('./faces').sixSided;
 
 var bag;
 
-describe("rolling Grime dice", function() {
+describe("using a set of 3 Grime dice", function() {
 
 	var generateTest = function(die, face, expected) {
 		return function() {
 			var dieSequence = sequence(face);
 			bag = new DiceBag(dieSequence);
-			assert.equal(bag.grime[die](), expected);
+			assert.equal(bag.grime3[die](), expected);
 		}
 	};
 
