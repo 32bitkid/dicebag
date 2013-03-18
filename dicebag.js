@@ -99,7 +99,7 @@ var DiceBag = (function() {
 
 			var die = this[dieType+sides];
 			if(die == undefined) {
-				die = createDie(this, this.random, parseInt(sides));
+				this[dieType+sides] = die = createDie(this, this.random, parseInt(sides));
 			}
 			return die(times, modifier)
 		}
