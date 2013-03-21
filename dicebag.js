@@ -1,3 +1,5 @@
+var diceNotation = require('./dice_notation');
+
 var DiceBag = (function() {
 
 	var lookupFn = function(sides, value) {
@@ -32,10 +34,14 @@ var DiceBag = (function() {
 
 	function DiceBag(random) {
 
+		this.parser = new diceNotation.Parser();
+		this.parser.yy.bag = this;
+
 		this.random = random || Math.random;
 		var context = this;
 
 		var createBoundDie = function(sides) { return createDie(context, context.random, sides); };
+		this.createDie = createBoundDie;
 
 		this.d4 = createBoundDie(4);
 		this.d6 = createBoundDie(6);
@@ -79,29 +85,8 @@ var DiceBag = (function() {
 		}
 	}
 
-	var tokens = {
-		basic: /^(\d*)([dD])(\d+)(([\+\-])(\d+))?/
-	}
 	DiceBag.prototype.roll = function(expression) {
-		var results
-
-		if(results = tokens.basic.exec(expression)) {
-			var dieType = results[2]
-			var sides = results[3];
-			var times = results[1] ? parseInt(results[1]) : 1;
-			var modifier = 0;
-
-			if(results[4] !== undefined) {
-				var sign = results[5] == "+" ? 1 : -1;
-				modifier = parseInt(results[6]) * sign;
-			}
-
-			var die = this[dieType+sides];
-			if(die == undefined) {
-				this[dieType+sides] = die = createDie(this, this.random, parseInt(sides));
-			}
-			return die(times, modifier)
-		}
+		return this.parser.parse(expression);
 	}
 
 	function RollResult(modifier) {
