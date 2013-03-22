@@ -36,8 +36,8 @@ expression_list:
     ;
 
 dice_roll:
-      group_or_integer DICE group_or_integer  { $$ = (yy.bag['d'+$3] || yy.bag.createDie($3))($1); }
-    | DICE group_or_integer                   { $$ = (yy.bag['d'+$2] || yy.bag.createDie($2))();; }
+      group_or_integer DICE group_or_integer  { $$ = (yy.bag['d'+$3] || yy.bag.createDie($3))($1, 0, yy.results); }
+    | DICE group_or_integer                   { $$ = (yy.bag['d'+$2] || yy.bag.createDie($2))(1, 0, yy.results); }
     ;
 
 group_or_integer:

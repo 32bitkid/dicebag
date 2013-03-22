@@ -29,4 +29,11 @@ describe("the parser", function() {
 	canParse("negative modifiers" , '2d6-3', [faces.face1, faces.face6], 4)
 	canParse("create new die", '1d7', [faces.face1], 1)
 
+	it("can get the actual rolls out of a complicated expression", function() {
+		var seq = sequence(faces.face1, faces.face2, 2/4, faces.face4, 4/100);
+		var bag = new DiceBag(seq);
+		var actual = bag.roll("1d10+1d6+1d4+1d6+1d100");
+		assert.deepEqual(actual.rolls, [1,2,3,4,5]);
+	});
+
 });

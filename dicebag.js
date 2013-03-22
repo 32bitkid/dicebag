@@ -15,7 +15,7 @@ var DiceBag = (function() {
 				sides.push(i);
 		}
 
-		var roll = function(times, modifier) {
+		var roll = function(times, modifier, allResults) {
 			times = (times === undefined) ? 1 : times;
 
 			var result = new RollResult(modifier);
@@ -24,6 +24,7 @@ var DiceBag = (function() {
 			for(var i = 0; i < times; i++) {
 				dieResult = lookupFn(sides, Math.floor(random() * sides.length));
 				result.addRoll(dieResult);
+				if(allResults) allResults.addRoll(dieResult);
 			}
 
 			return result;
@@ -86,7 +87,11 @@ var DiceBag = (function() {
 	}
 
 	DiceBag.prototype.roll = function(expression) {
-		return this.parser.parse(expression);
+		var r = this.parser.yy.results = new RollResult();
+		var total = this.parser.parse(expression).valueOf();
+		this.parser.yy.results = undefined;
+		r.total = function() { return total; };
+		return r;
 	}
 
 	function RollResult(modifier) {
